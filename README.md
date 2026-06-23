@@ -1,5 +1,8 @@
 # HELD
 
+Harmonic Ensemble Lattice Dynamics: Finite-temperature phonon dispersions from MD-based force constants.
+
+
 HELD workflow for monatomic `bcc`, `fcc`, and `hcp` datasets stored as NPZ trajectories (at the moment, It will be able to read md-based simulations from qe and lammps in near future).
 
 The main entrypoint is `HELD.py`. It supports:
