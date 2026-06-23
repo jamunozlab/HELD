@@ -1,21 +1,15 @@
 # HELD
 
-<<<<<<< HEAD
+
 Harmonic Ensemble Lattice Dynamics: Finite-temperature phonon dispersions from MD-based force constants.
 
 
-HELD workflow for monatomic `bcc`, `fcc`, and `hcp` datasets stored as NPZ trajectories (at the moment, It will be able to read md-based simulations from qe and lammps in near future).
-=======
-Unified HELD workflow for monatomic `bcc`, `fcc`, and `hcp` datasets stored as NPZ trajectories.
->>>>>>> fa4b6e7 (update readme)
+The main code is `HELD.py`. It supports:
 
-The main entrypoint is `HELD.py`. It supports:
-
-- `fit`: fit HELD coefficients from an NPZ trajectory
+- `fit`: fit HELD coefficients from an NPZ trajectory (Now but it will support md-trajectories from Quantum Espresso and LAMMPS in the near future)
 - `dispersion`: compute and plot the mean HELD dispersion along a built-in high-symmetry path
 - `heatmap`: compute and plot the HELD dispersion heat map from all fitted frames
 
-The workflow does not require TDEP inputs for fitting or plotting. Reference dispersions can be compared separately if desired.
 
 ## Current scope
 
@@ -160,7 +154,6 @@ RY_PER_BOHR_TO_EV_PER_ANG = RY_TO_EV / BOHR_TO_ANG
 forces_ry_bohr = forces_ev_ang / RY_PER_BOHR_TO_EV_PER_ANG
 ```
 
-There is an older FCC-only LAMMPS dump reader in `HELD_fcc.py`, but it is not part of the current unified `HELD.py` workflow.
 
 ## Recommended checks before running HELD
 
