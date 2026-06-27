@@ -23,15 +23,15 @@ The main code is `HELD.py`. It supports:
 
 ### BCC Fe
 
-![BCC Fe animated phonon dispersion](examples/iron/gifs/bcc_2.43_5000K_0001_0399.gif)
+![BCC Fe animated phonon dispersion](assets/bcc_2.43_5000K_0001_0399.gif)
 
 ### FCC Fe
 
-![FCC Fe animated phonon dispersion](examples/iron/gifs/fcc_3.00_5000K_0001_0399.gif)
+![FCC Fe animated phonon dispersion](assets/fcc_3.00_5000K_0001_0399.gif)
 
 ### HCP Fe
 
-![HCP Fe animated phonon dispersion](examples/iron/gifs/hcp_a_2.18_c_3.42_5000K_0001_0399.gif)
+![HCP Fe animated phonon dispersion](assets/hcp_a_2.18_c_3.42_5000K_0001_0399.gif)
 
 ## Install
 
