@@ -19,6 +19,20 @@ The main code is `HELD.py`. It supports:
 - The notebook `notebooks/iron_three_phase_examples.ipynb` shows one `bcc`, one `fcc`, and one `hcp` Fe case using `skip=100` and `aggregate="mean"`.
 - The unified code currently reads normalized NPZ trajectories only. A direct general-purpose Quantum ESPRESSO or LAMMPS importer is not part of the unified workflow yet.
 
+## Animated Iron Examples
+
+### BCC Fe
+
+![BCC Fe animated phonon dispersion](examples/iron/gifs/bcc_2.43_5000K_0001_0399.gif)
+
+### FCC Fe
+
+![FCC Fe animated phonon dispersion](examples/iron/gifs/fcc_3.00_5000K_0001_0399.gif)
+
+### HCP Fe
+
+![HCP Fe animated phonon dispersion](examples/iron/gifs/hcp_a_2.18_c_3.42_5000K_0001_0399.gif)
+
 ## Install
 
 ```bash
