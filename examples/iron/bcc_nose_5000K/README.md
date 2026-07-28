@@ -32,6 +32,7 @@ python examples/iron/bcc_nose_5000K/make_animated_dispersion.py
 python examples/iron/bcc_nose_5000K/plot_imaginary_qpoints.py
 python examples/iron/bcc_nose_5000K/plot_imaginary_count_by_iteration.py
 python examples/iron/bcc_nose_5000K/plot_imaginary_count_vs_temperature.py
+python examples/iron/bcc_nose_5000K/make_imaginary_count_vs_temperature_gif.py
 ```
 
 `run_case.py` uses the included `qe_output_parser.py`, so the workflow does
@@ -65,6 +66,11 @@ plots.
 
 ![Imaginary-frequency count versus temperature](held_imaginary_count_vs_temperature.png)
 
+The animated version replaces the iteration colorbar with a highlighted
+current-timestep marker and a running trajectory:
+
+![Animated imaginary-frequency count versus temperature](held_imaginary_count_vs_temperature_by_step.gif)
+
 The integer count depends on the 301-point symmetry-path sampling. The
 path-weighted occurrence and magnitude integrals in
 `held_imaginary_count_by_iteration.csv` are less sensitive to the sampling
@@ -79,6 +85,7 @@ density.
 - `plot_imaginary_qpoints.py`: q-resolved imaginary-mode report
 - `plot_imaginary_count_by_iteration.py`: per-iteration path integration
 - `plot_imaginary_count_vs_temperature.py`: temperature correlation
+- `make_imaginary_count_vs_temperature_gif.py`: animated temperature correlation
 - `held_run_summary.json`: settings and numerical summary
 - `simulation_parsed.npz` and `simulation_held.npz`: parsed and normalized data
 - `held_mean_all_valid.csv`: mean and per-frame HELD coefficients
