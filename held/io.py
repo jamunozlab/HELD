@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -32,6 +33,7 @@ class TrajectoryDataset:
     positions_frac: np.ndarray
     forces_ev_ang: np.ndarray
     step_ids: np.ndarray
+    observables: dict[str, np.ndarray]
 
     @property
     def natoms(self) -> int:
@@ -47,6 +49,15 @@ class TrajectoryDataset:
         every: int = 1,
         max_frames: int = 0,
     ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        selected = self.select_frame_indices(skip=skip, every=every, max_frames=max_frames)
+        return self.positions_frac[selected], self.forces_ev_ang[selected], self.step_ids[selected]
+
+    def select_frame_indices(
+        self,
+        skip: int = 0,
+        every: int = 1,
+        max_frames: int = 0,
+    ) -> np.ndarray:
         finite_mask = np.isfinite(self.positions_frac).all(axis=(1, 2)) & np.isfinite(self.forces_ev_ang).all(axis=(1, 2))
         selected = np.arange(len(self.positions_frac))[skip::every]
         selected = selected[finite_mask[selected]]
@@ -54,7 +65,7 @@ class TrajectoryDataset:
             selected = selected[:max_frames]
         if len(selected) == 0:
             raise ValueError(f"No finite frames selected from {self.path}.")
-        return self.positions_frac[selected], self.forces_ev_ang[selected], self.step_ids[selected]
+        return selected
 
 
 def wrap_fractional(frac: np.ndarray) -> np.ndarray:
@@ -83,6 +94,18 @@ def load_npz_dataset(path: Path) -> TrajectoryDataset:
     forces_ev_ang = np.asarray(data["forces_ry_au"], dtype=float) * RY_PER_BOHR_TO_EV_PER_ANG
     step_ids = np.asarray(data["iteration"], dtype=int) if "iteration" in data.files else np.arange(len(positions_frac), dtype=int)
     symbols = [str(symbol) for symbol in np.asarray(data["symbols"]).tolist()]
+    observable_names = (
+        "time_ps",
+        "temperature_K",
+        "pressure_GPa",
+        "mag_total_Bohr",
+        "abs_mag_total_Bohr",
+    )
+    observables = {
+        name: np.asarray(data[name], dtype=float)
+        for name in observable_names
+        if name in data.files and np.asarray(data[name]).shape == (len(positions_frac),)
+    }
 
     return TrajectoryDataset(
         path=path,
@@ -92,6 +115,7 @@ def load_npz_dataset(path: Path) -> TrajectoryDataset:
         positions_frac=positions_frac,
         forces_ev_ang=forces_ev_ang,
         step_ids=step_ids,
+        observables=observables,
     )
 
 
@@ -126,3 +150,40 @@ def write_fc_csv(path: Path, result: HeldRunResult) -> None:
             for value in row:
                 print(f"{value}, ", end="", file=handle)
             print("", file=handle)
+
+
+def write_step_csv(
+    path: Path,
+    result: HeldRunResult,
+    frame_indices: np.ndarray,
+    observables: dict[str, np.ndarray],
+) -> None:
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    frame_indices = np.asarray(frame_indices, dtype=int)
+    if len(frame_indices) != len(result.step_ids):
+        raise ValueError("Frame-index and HELD-result lengths do not match.")
+
+    observable_names = (
+        "time_ps",
+        "temperature_K",
+        "pressure_GPa",
+        "mag_total_Bohr",
+        "abs_mag_total_Bohr",
+    )
+    with path.open("w", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(["frame_index", "iteration", *observable_names, *result.labels])
+        for frame_index, step_id, coefficients in zip(frame_indices, result.step_ids, result.step_values):
+            values = [
+                float(observables[name][frame_index]) if name in observables else float("nan")
+                for name in observable_names
+            ]
+            writer.writerow(
+                [
+                    int(frame_index),
+                    int(step_id),
+                    *values,
+                    *[float(value) for value in coefficients],
+                ]
+            )

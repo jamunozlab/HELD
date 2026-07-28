@@ -12,7 +12,7 @@ os.environ.setdefault("XDG_CACHE_HOME", "/tmp")
 import numpy as np
 from scipy.ndimage import gaussian_filter
 
-from held.io import HeldRunResult, read_fc_csv, write_fc_csv
+from held.io import HeldRunResult, read_fc_csv, write_fc_csv, write_step_csv
 from held.model import build_model_from_npz
 from held.phases import PHASES, build_q_path
 
@@ -31,6 +31,7 @@ def fit_case(
     phase: str,
     npz_path: str | Path,
     output_csv: str | Path | None = None,
+    output_steps_csv: str | Path | None = None,
     aggregate: str = "mean",
     skip: int = 0,
     every: int = 1,
@@ -47,10 +48,20 @@ def fit_case(
         cutoff_ang=cutoff_ang,
         mass_amu=mass_amu,
     )
-    positions_frac, forces_ev_ang, step_ids = dataset.select_frames(skip=skip, every=every, max_frames=max_frames)
+    frame_indices = dataset.select_frame_indices(skip=skip, every=every, max_frames=max_frames)
+    positions_frac = dataset.positions_frac[frame_indices]
+    forces_ev_ang = dataset.forces_ev_ang[frame_indices]
+    step_ids = dataset.step_ids[frame_indices]
     result = model.fit_series(positions_frac, forces_ev_ang, step_ids, aggregate=aggregate, verbose=verbose)
     if output_csv is not None:
         write_fc_csv(Path(output_csv), result)
+    if output_steps_csv is not None:
+        write_step_csv(
+            Path(output_steps_csv),
+            result,
+            frame_indices=frame_indices,
+            observables=dataset.observables,
+        )
     info = {
         "phase": metadata.phase,
         "symbol": metadata.symbol,
@@ -289,6 +300,12 @@ def parse_args() -> argparse.Namespace:
     fit_parser = subparsers.add_parser("fit")
     add_common(fit_parser)
     fit_parser.add_argument("--output-csv", type=Path, required=True)
+    fit_parser.add_argument(
+        "--output-steps-csv",
+        type=Path,
+        default=None,
+        help="Optional per-step CSV with HELD coefficients and available trajectory observables.",
+    )
     fit_parser.add_argument("--aggregate", choices=["mean", "gaussian", "global"], default="mean")
     fit_parser.add_argument("--skip", type=int, default=0)
     fit_parser.add_argument("--every", type=int, default=1)
@@ -333,6 +350,7 @@ def main() -> int:
             phase=args.phase,
             npz_path=args.npz,
             output_csv=args.output_csv,
+            output_steps_csv=args.output_steps_csv,
             aggregate=args.aggregate,
             skip=args.skip,
             every=args.every,
@@ -346,6 +364,8 @@ def main() -> int:
             f"[HELD] phase={info['phase']} symbol={info['symbol']} frames={info['n_frames']} "
             f"aggregate={args.aggregate} shells={info['num_shells']} -> {args.output_csv}"
         )
+        if args.output_steps_csv is not None:
+            print(f"[HELD] step observables -> {args.output_steps_csv}")
         print("[HELD] shell_distances_ang=" + ", ".join(f"{value:.6f}" for value in info["selected_shell_distances"]))
         print("[HELD] mean_coefficients=" + ", ".join(f"{label}={value:.6f}" for label, value in zip(result.labels, result.mean_values)))
         return 0

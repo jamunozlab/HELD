@@ -1,0 +1,74 @@
+{
+  "phase": "bcc",
+  "material": "Fe",
+  "thermostat": "Nose-Hoover",
+  "target_temperature_K": 5000,
+  "source_qe_output": "fe1.out",
+  "natoms": 128,
+  "supercell": [
+    4,
+    4,
+    4
+  ],
+  "cell_length_ang": 10.040026664733887,
+  "conventional_lattice_parameter_ang": 2.5100066661834717,
+  "printed_md_frames": 400,
+  "selected_complete_frames": 399,
+  "first_iteration": 1,
+  "last_iteration": 399,
+  "incomplete_iterations": [
+    400
+  ],
+  "aggregate": "arithmetic mean",
+  "num_shells": 5,
+  "shell_distances_ang": [
+    2.1737295365831737,
+    2.5100066661834717,
+    3.5496854689635433,
+    4.1623751665107065,
+    4.347459073166347
+  ],
+  "temperature_K": {
+    "count": 399,
+    "mean": 5054.693922305764,
+    "std": 1008.6981964854087,
+    "min": 2575.562255859375,
+    "max": 7360.0283203125
+  },
+  "pressure_GPa": {
+    "count": 399,
+    "mean": 172.04955966729568,
+    "std": 9.186187124861487,
+    "min": 138.46800231933594,
+    "max": 190.4510040283203
+  },
+  "energy_Ry": {
+    "count": 399,
+    "mean": -42127.82603631043,
+    "std": 1.6908899239888402,
+    "min": -42132.42492415,
+    "max": -42124.20026699
+  },
+  "mean_dispersion_min_THz": -1.0244515057909176e-07,
+  "mean_dispersion_max_THz": 12.33250297644982,
+  "negative_mean_path_points": 0,
+  "per_step_dispersion_min_THz": -11.89021891902298,
+  "per_step_dispersion_max_THz": 18.626834368630153,
+  "heatmap_shape": [
+    399,
+    301,
+    3
+  ],
+  "outputs": {
+    "parsed_npz": "simulation_parsed.npz",
+    "held_input_npz": "simulation_held.npz",
+    "coefficient_csv": "held_mean_all_valid.csv",
+    "step_csv": "held_steps_with_thermodynamics.csv",
+    "dispersion_data": "held_dispersion_all_valid_mean.dat",
+    "dispersion_plot": "held_dispersion_all_valid_mean.png",
+    "heatmap_cache": "held_heatmap_steps_all_valid.npz",
+    "heatmap_plot": "held_heatmap_all_valid_mean.png",
+    "observables_plot": "held_temperature_pressure_energy_by_step.png",
+    "animation_gif": "bcc_Fe_nose_5000K_HELD_0001_0399.gif"
+  }
+}
