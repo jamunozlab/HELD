@@ -1,0 +1,66 @@
+{
+  "phase": "bcc",
+  "magnetic_state": "noncollinear",
+  "temperature_label_K": 4000,
+  "source_npz": "/Users/dajuarez4/Documents/Fe/dataset/bcc/magnetic-non_coll/simulation.npz",
+  "ideal_reference_npz": "/Users/dajuarez4/Documents/Fe/dataset/bcc/magnetic-non_coll/simulation-ideal.npz",
+  "held_input_npz": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_two_frames/simulation_held_ideal_reference.npz",
+  "aggregate": "arithmetic mean",
+  "selected_frames": 2,
+  "step_ids": [
+    0,
+    1
+  ],
+  "natoms": 128,
+  "num_shells": 5,
+  "num_coefficients": 13,
+  "shell_distances_ang": [
+    2.2083641189253704,
+    2.549999237060547,
+    3.6062435050920705,
+    4.228695342511183,
+    4.416728237850741
+  ],
+  "temperature_K": [
+    4000.0,
+    4099.02783203125
+  ],
+  "pressure_GPa": [
+    126.3740005493164,
+    121.86199951171875
+  ],
+  "total_magnetization_Bohr_per_cell": [
+    2.707101821899414,
+    2.495936632156372
+  ],
+  "absolute_magnetization_Bohr_per_cell": [
+    55.38999938964844,
+    45.709999084472656
+  ],
+  "mean_dispersion_min_THz": -5.1726760377052084e-08,
+  "mean_dispersion_max_THz": 14.34678449859923,
+  "snapshot_dispersion_min_THz": [
+    -1.471835839277115e-07,
+    9.998849405128033e-08
+  ],
+  "snapshot_dispersion_max_THz": [
+    14.235239616802518,
+    14.457468794734108
+  ],
+  "maximum_snapshot_standard_deviation_THz": 0.33730447080790427,
+  "negative_mean_path_points": 0,
+  "limitations": [
+    "Only two complete force snapshots are available.",
+    "The fit is algebraically overdetermined but not statistically converged.",
+    "Snapshot spread must be retained when interpreting the two-frame mean.",
+    "Additional decorrelated AIMD frames are required for quantitative phonons."
+  ],
+  "outputs": {
+    "coefficient_csv": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_two_frames/held_mean_two_frames.csv",
+    "step_csv": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_two_frames/held_steps_with_thermodynamics.csv",
+    "mean_dispersion_data": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_two_frames/held_dispersion_two_frame_mean.dat",
+    "mean_dispersion_plot": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_two_frames/held_dispersion_two_frame_mean.png",
+    "snapshot_dispersion_data": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_two_frames/held_dispersion_two_snapshots.npz",
+    "snapshot_comparison_plot": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_two_frames/held_dispersion_two_snapshots_and_mean.png"
+  }
+}

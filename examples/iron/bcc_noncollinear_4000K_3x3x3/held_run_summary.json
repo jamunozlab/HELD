@@ -1,0 +1,76 @@
+{
+  "phase": "bcc",
+  "magnetic_state": "noncollinear",
+  "temperature_label_K": 4000,
+  "source_npz": "/Users/dajuarez4/Documents/Fe/dataset/bcc/magnetic-non_coll/simulation.npz",
+  "held_input_npz": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_3x3x3/simulation_held_ideal_reference.npz",
+  "natoms": 54,
+  "supercell": [
+    3,
+    3,
+    3
+  ],
+  "selected_frames": 64,
+  "first_iteration": 3,
+  "last_iteration": 66,
+  "trajectory_span_ps": 0.0629999996162951,
+  "aggregate": "arithmetic mean",
+  "num_shells": 5,
+  "shell_distances_ang": [
+    2.2083648071805246,
+    2.550000031789144,
+    3.6062446290080308,
+    4.228696660419466,
+    4.416729614361049
+  ],
+  "temperature_K": {
+    "count": 64,
+    "mean": 3803.8322410583496,
+    "std": 540.3401520445543,
+    "min": 3086.1728515625,
+    "max": 4825.52001953125
+  },
+  "pressure_GPa": {
+    "count": 64,
+    "mean": 128.2193785905838,
+    "std": 3.615831041614871,
+    "min": 122.9439926147461,
+    "max": 138.2410125732422
+  },
+  "global_magnetization_magnitude_Bohr_per_cell": {
+    "count": 64,
+    "mean": 3.4918169692750767,
+    "std": 1.3554595002293313,
+    "min": 1.460890112180761,
+    "max": 5.366749592470122
+  },
+  "absolute_magnetization_Bohr_per_cell": {
+    "count": 64,
+    "mean": 15.042187541723251,
+    "std": 2.56698654415367,
+    "min": 11.75,
+    "max": 19.950000762939453
+  },
+  "mean_dispersion_min_THz": -1.3438350339351678e-07,
+  "mean_dispersion_max_THz": 15.078276000764056,
+  "negative_mean_path_points": 0,
+  "heatmap_shape": [
+    64,
+    301,
+    3
+  ],
+  "limitations": [
+    "The 64 complete frames are consecutive and span only 0.063 ps, so they are strongly correlated.",
+    "The 3x3x3 box is smaller than twice the fifth-shell force-constant cutoff used by the default BCC HELD model.",
+    "This result is an early trajectory diagnostic, not a statistically converged finite-temperature phonon spectrum.",
+    "Quantitative interpretation requires a longer equilibrated trajectory and a supercell-size/cutoff convergence test."
+  ],
+  "outputs": {
+    "coefficient_csv": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_3x3x3/held_mean_all_complete.csv",
+    "step_csv": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_3x3x3/held_steps_with_thermodynamics.csv",
+    "dispersion_data": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_3x3x3/held_dispersion_all_complete_mean.dat",
+    "dispersion_plot": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_3x3x3/held_dispersion_all_complete_mean.png",
+    "heatmap_cache": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_3x3x3/held_heatmap_steps_all_complete.npz",
+    "heatmap_plot": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_noncollinear_4000K_3x3x3/held_heatmap_all_complete.png"
+  }
+}

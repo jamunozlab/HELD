@@ -55,6 +55,7 @@ Minimal usage:
   --phase bcc \
   --npz /path/to/case.npz \
   --output-csv results/held_case.csv \
+  --output-steps-csv results/held_case_steps.csv \
   --aggregate mean \
   --skip 100
 ```
@@ -88,6 +89,39 @@ If you want a different standard symmetry path, pass it explicitly. Example:
   --output-plot results/held_case_dispersion.png \
   --path GM-H-N-GM-P-H
 ```
+
+When `--output-steps-csv` is provided, HELD writes a companion table without changing the coefficient-only CSV consumed by `dispersion` and `heatmap`. Each selected frame contains:
+
+- the zero-based source-frame index,
+- the trajectory iteration,
+- time in ps when available,
+- temperature in K,
+- pressure in GPa,
+- total magnetization in Bohr magnetons per cell,
+- absolute magnetization in Bohr magnetons per cell,
+- and all fitted HELD coefficients for that frame.
+
+Missing observables are written as `nan`, so the same option can be used with magnetic and non-magnetic trajectories.
+
+## Collinear-magnetic BCC example
+
+`examples/iron/bcc_collinear_4000K/run_case.py` runs the new `128`-atom collinear BCC trajectory in `../dataset/bcc/magnetic-collinear/`. It replaces the displaced initial structure in `simulation.npz` with the ideal BCC reference from `simulation-ideal.npz`, while preserving the full updated trajectory, forces, temperature, pressure, and magnetization arrays. The HELD-specific copy also maps the artificial per-atom QE labels (`A01`, `A02`, and so on) back to the physical element symbol `Fe`.
+
+Run it from the HELD repository:
+
+```bash
+/opt/anaconda3/bin/python examples/iron/bcc_collinear_4000K/run_case.py
+```
+
+The example writes the mean dispersion, heatmap, step-resolved HELD/thermodynamic CSV, a temperature-pressure-magnetization diagnostic plot, and a JSON summary under `examples/iron/bcc_collinear_4000K/`.
+
+The current run uses all `112` valid frames. It has a mean temperature of `4038.6 K`, a mean pressure of `125.88 GPa`, a mean total magnetization of `10.82` Bohr magnetons/cell, and a mean absolute magnetization of `27.32` Bohr magnetons/cell.
+
+![Collinear BCC HELD mean dispersion](examples/iron/bcc_collinear_4000K/held_dispersion_all_valid_mean.png)
+
+![Collinear BCC HELD heat map](examples/iron/bcc_collinear_4000K/held_heatmap_all_valid_mean.png)
+
+![Collinear BCC temperature, pressure, and magnetization](examples/iron/bcc_collinear_4000K/held_temperature_pressure_magnetization_by_step.png)
 
 ## Required NPZ format
 

@@ -1,0 +1,63 @@
+{
+  "phase": "bcc",
+  "symbol": "Fe",
+  "source_npz": "/Users/dajuarez4/Documents/Fe/dataset/bcc/magnetic-collinear/simulation.npz",
+  "ideal_reference_npz": "/Users/dajuarez4/Documents/Fe/dataset/bcc/magnetic-collinear/simulation-ideal.npz",
+  "held_input_npz": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_collinear_4000K/simulation_held_ideal_reference.npz",
+  "aggregate": "mean",
+  "selected_frames": 112,
+  "first_iteration": 1,
+  "last_iteration": 112,
+  "num_shells": 5,
+  "shell_distances_ang": [
+    2.208364738355009,
+    2.549999952316284,
+    3.6062445166164347,
+    4.228696528628638,
+    4.416729476710018
+  ],
+  "temperature_K": {
+    "count": 112,
+    "mean": 4038.6346108572825,
+    "std": 254.35089203789255,
+    "min": 3510.244873046875,
+    "max": 4626.2802734375
+  },
+  "pressure_GPa": {
+    "count": 112,
+    "mean": 125.88378715515137,
+    "std": 1.3733606277070152,
+    "min": 123.10799407958984,
+    "max": 128.46299743652344
+  },
+  "total_magnetization_Bohr_per_cell": {
+    "count": 112,
+    "mean": 10.815089271536895,
+    "std": 4.908282343106589,
+    "min": 0.7200000286102295,
+    "max": 16.25
+  },
+  "absolute_magnetization_Bohr_per_cell": {
+    "count": 112,
+    "mean": 27.318214297294617,
+    "std": 3.4918925043706825,
+    "min": 21.059999465942383,
+    "max": 34.58000183105469
+  },
+  "mean_dispersion_min_THz": -0.17833998143627058,
+  "mean_dispersion_max_THz": 14.10633295472173,
+  "heatmap_shape": [
+    112,
+    301,
+    3
+  ],
+  "outputs": {
+    "coefficient_csv": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_collinear_4000K/held_mean_all_valid.csv",
+    "step_csv": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_collinear_4000K/held_steps_with_thermodynamics.csv",
+    "dispersion_data": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_collinear_4000K/held_dispersion_all_valid_mean.dat",
+    "dispersion_plot": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_collinear_4000K/held_dispersion_all_valid_mean.png",
+    "heatmap_cache": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_collinear_4000K/held_heatmap_steps_all_valid.npz",
+    "heatmap_plot": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_collinear_4000K/held_heatmap_all_valid_mean.png",
+    "observables_plot": "/Users/dajuarez4/Documents/Fe/HELD/examples/iron/bcc_collinear_4000K/held_temperature_pressure_magnetization_by_step.png"
+  }
+}
